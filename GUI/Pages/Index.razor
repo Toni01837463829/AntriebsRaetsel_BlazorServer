@@ -61,6 +61,7 @@
                         </tr>
                 </tbody>
             </table>
+            <button id="btn_change_name" @onclick="ChangeNamePage">Change Name</button>
             <button id="btn_highscore" @onclick="HighscorePage">Scoreboard</button>
         </div>
 
@@ -87,6 +88,10 @@
         NavigationManager.NavigateTo("/CreateQuestion");
     }
     private void HighscorePage()
+    {
+        NavigationManager.NavigateTo("/Scoreboard/10");
+    }
+    private void ChangeNamePage()
     {
         NavigationManager.NavigateTo("/Scoreboard/10");
     }
