@@ -1,0 +1,52 @@
+﻿@page "/scoreboard/{take:int}"
+@using Model.Entities
+@using Repos.Interface
+
+@inject IRepository<Scores> ScoresRepository
+
+<h3>Scoreboard</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Player Name</th>
+            <th>Score</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var score in topScores)
+        {
+            <tr>
+                <td>@score.PlayerName</td>
+                <td>@score.Score</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Scores> topScores;
+    private int take;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Load the top 10 scores from the repository
+        topScores = ScoresRepository.ReadAll()
+            .OrderByDescending(s => s.Score)
+            .Take(take)
+            .ToList();
+    }
+    
+    
+    [Parameter] public int Take
+    {
+        get => take;
+        set
+        {
+            if (value >= 0)
+            {
+                take = value;
+            }
+        }
+    }
+}
