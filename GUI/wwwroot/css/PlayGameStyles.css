@@ -1,0 +1,67 @@
+﻿@font-face {
+    font-family: LunatixBold;
+    src: url(Fonts/Lunatix_Bold.otf);
+}
+
+@font-face {
+    font-family: LunatixLight;
+    src: url(Fonts/Lunatix_Light.otf);
+}
+
+* {
+    font-family: LunatixLight;
+}
+.bg_play {
+    width: 100vw;
+    height: min-content;
+    background-image: url(Hintergrund/lila.png) !important;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#playGamesh1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: LunatixBold;
+    background: -webkit-linear-gradient(rgb(187, 68, 255) 15%, rgb(0, 0, 0) 85%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    font-size: 12vh;
+}
+
+button:hover {
+    cursor: pointer;
+}
+.buttons {
+    display: flex;
+    justify-content: space-evenly;
+}
+#question {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10vh;
+    font-size: 4vh;
+    background-color: rgb(255, 201, 129);
+    color: rgb(255, 166, 46);
+    border: 3px rgb(255, 166, 46) solid;
+    border-radius: 12px;
+}
+.btn_answer {
+    width: 30vh;
+    height: min-content;
+    font-size: 4vh;
+    background-color: rgb(212, 137, 255);
+    color: rgb(187, 68, 255);
+    border: 3px rgb(187, 68, 255) solid;
+    border-radius: 12px;
+}
+p {
+    text-align: center;
+    word-wrap:break-word;
+    overflow-wrap:break-word;
+}

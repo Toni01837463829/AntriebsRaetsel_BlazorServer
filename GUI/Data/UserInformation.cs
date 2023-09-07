@@ -21,7 +21,7 @@ namespace GUI
         /// <summary>
         /// Execute when the player has answered a wrong Questions
         /// </summary>
-        public bool Lost()
+        public void Lost()
         {
             previousQuestionIDs.Clear();
             if(CurrentScore > MomentaryHighScore)

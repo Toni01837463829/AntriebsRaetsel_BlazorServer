@@ -4,75 +4,70 @@
 @inject NavigationManager NavigationManager
 
 <PageTitle>Index</PageTitle>
+<div class="container">
+    <div class="row">
+        <h1>Antriebsrätsel</h1>
+    </div>
+    <div class="row">
 
-<!DOCTYPE html>
-<html lang="en">
+        <div id="content1">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Antriebsrätsel</title>
-    <link rel="stylesheet" href="Antriebsrätsel_style.css">
-</head>
+            <button id="btn_question" @onclick="AddQuestionPage">Add Question</button>
+            <div id="content2">
 
-<body>
-    <h1>Antriebsrätsel</h1>
-    <div id="content1">
-        
-        <button id="btn_question" @onclick="AddQuestionPage">Add Question</button>
-        <div id="content2">
-
-            <p id="highscore">Highscore</p>          
+                <p id="highscore">Highscore</p>
                 <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Player Name</th>
-                        <th>Score</th>
-                    </tr>
-                </thead>
-                <tbody>
+                    <thead>
+                        <tr>
+                            <th>Player Name</th>
+                            <th>Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                         @*         @foreach (var score in topScores)
-                    {
-                    <tr>
-                    <td>@score.PlayerName</td>
-                    <td>@score.Score</td>
-                    </tr>
-                    } *@
-                    <tr>
-                        <td>Playername</td>
-                        <td>Score: 1</td>
-                    </tr>
-                    <tr>
-                        <td>Playername</td>
-                        <td>Score: 1</td>
-                    </tr>
-                    <tr>
-                        <td>Playername</td>
-                        <td>Score: 1</td>
-                    </tr>
-                    <tr>
-                        <td>Playername</td>
-                        <td>Score: 1</td>
-                    </tr>
-                       
+                        {
+                        <tr>
+                        <td>@score.PlayerName</td>
+                        <td>@score.Score</td>
+                        </tr>
+                        } *@
                         <tr>
                             <td>Playername</td>
                             <td>Score: 1</td>
                         </tr>
-                </tbody>
-            </table>
-            <button id="btn_change_name" @onclick="ChangeNamePage">Change Name</button>
-            <button id="btn_highscore" @onclick="HighscorePage">Scoreboard</button>
-        </div>
+                        <tr>
+                            <td>Playername</td>
+                            <td>Score: 1</td>
+                        </tr>
+                        <tr>
+                            <td>Playername</td>
+                            <td>Score: 1</td>
+                        </tr>
+                        <tr>
+                            <td>Playername</td>
+                            <td>Score: 1</td>
+                        </tr>
 
-        <button id="btn_play">Play</button>
+                        <tr>
+                            <td>Playername</td>
+                            <td>Score: 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button id="btn_change_name" @onclick="ChangeNamePage">Change Name</button>
+                
+                <button id="btn_highscore" @onclick="HighscorePage">Scoreboard</button>
+
+            </div>
+
+            <button id="btn_play" @onclick="PlayPage">Play</button>
+        </div>
     </div>
+</div>
+
 
 
    
-</body>
-
-</html>
 
 
 
@@ -93,6 +88,10 @@
     }
     private void ChangeNamePage()
     {
-        NavigationManager.NavigateTo("/Scoreboard/10");
+        // NavigationManager.NavigateTo("/Scoreboard/10");
+    }
+    private void PlayPage()
+    {
+        NavigationManager.NavigateTo("/Play");
     }
 }

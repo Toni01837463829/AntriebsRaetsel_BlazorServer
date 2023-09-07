@@ -81,8 +81,8 @@ a, .btn-link {
 }
 
 body {
-    width:100vw;
-    height:100vh;
+    /*width: 100vw;*/
+    height: 100vh;
     background-image: url(Hintergrund/blau.png);
     background-size: cover;
     display: flex;
@@ -159,8 +159,8 @@ h1 {
     color: rgb(70, 213, 75);
     border: 3px rgb(70, 213, 75) solid;
     border-radius: 12px;
-    position: absolute;
-    bottom: 15px;
+    /*position: absolute;*/
+    padding 15px;
 }
 button:hover {
     cursor: pointer;
