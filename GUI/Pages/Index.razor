@@ -1,7 +1,7 @@
 ﻿@page "/"
 @using Repos.Interface
 @using Model.Entities
-
+@inject NavigationManager NavigationManager
 
 <PageTitle>Index</PageTitle>
 
@@ -19,7 +19,7 @@
     <h1>Antriebsrätsel</h1>
     <div id="content1">
         
-        <button id="btn_question">Add Question</button>
+        <button id="btn_question" @onclick="AddQuestionPage">Add Question</button>
         <div id="content2">
 
             <p id="highscore">Highscore</p>          
@@ -61,8 +61,7 @@
                         </tr>
                 </tbody>
             </table>
-            <button id="btn_highscore">Scoreboard</button>
-
+            <button id="btn_highscore" @onclick="HighscorePage">Scoreboard</button>
         </div>
 
         <button id="btn_play">Play</button>
@@ -73,7 +72,6 @@
 </body>
 
 </html>
-m
 
 
 
@@ -82,7 +80,14 @@ m
 
     protected override void OnInitialized()
     {
- 
-    }
 
+    }
+    private void AddQuestionPage()
+    {
+        NavigationManager.NavigateTo("/CreateQuestion");
+    }
+    private void HighscorePage()
+    {
+        NavigationManager.NavigateTo("/Scoreboard/10");
+    }
 }

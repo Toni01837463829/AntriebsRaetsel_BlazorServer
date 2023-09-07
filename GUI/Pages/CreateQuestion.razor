@@ -4,9 +4,85 @@
 @inject IRepository<Answers> AnswerRepository
 @inject IRepository<Questions> QuestionsRepository
 @inject IRepository<Scores> ScoresRepository
-<h3>CreateQuestion</h3>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question to Add</title>
+    <link rel="stylesheet" href="Question_to_Add_style.css">
+</head>
 <EditForm Model="@NewQuestion" OnValidSubmit="Submit">
+<body>
+    <div id="CreateQuestionBody">
+        <h1 id="CreateQuestionh1">Question to Add</h1>
+        <div class="content3">
+                <div class="form-group">
+                    <label for="QuestionText">Question Text:</label>
+                    <InputText id="QuestionText" @bind-Value="Question.QuestionText" class="form-control" />
+                    <ValidationMessage For="(() => NewQuestion)" />
+                </div>
+        </div>
+    <div class="content3">
+                <div class="form-group" id="answer1">
+                    <label for="QuestionText">&nbspAnswer 1</label>
+                <InputText id="Answer 1" @bind-Value="Answer1.AnswerText" class="form-control" />
+                <ValidationMessage For="(() => NewQuestion)" />
+                    @* <label for="QuestionText">&nbspIs True?</label> *@
+                <div class="form-check">
+                    <InputCheckbox @bind-Value="Answer1.IsCorrect" class="form-check-input" />
+                    <label class="form-check-label">Is True: @Answer1.IsCorrect</label>
+                </div>
+
+            </div>
+                <div class="form-group" id="answer2">
+                    <label for="QuestionText">&nbspAnswer 2</label>
+                    <InputText id="Answer 2" @bind-Value="Answer2.AnswerText" class="form-control" />
+                    <ValidationMessage For="(() => NewQuestion)" />
+                    @* <label for="QuestionText">&nbspIs True?</label> *@
+                    <div class="form-check">
+                        <InputCheckbox @bind-Value="Answer2.IsCorrect" class="form-check-input" />
+                        <label class="form-check-label">Is True: @Answer2.IsCorrect</label>
+                    </div>
+
+                </div>
+    </div>
+    <div class="content3">
+                <div class="form-group" id="answer3">
+                    <label for="QuestionText">&nbspAnswer 3</label>
+                    <InputText id="Answer 3" @bind-Value="Answer3.AnswerText" class="form-control" />
+                    <ValidationMessage For="(() => NewQuestion)" />
+                    @* <label for="QuestionText">&nbspIs True?</label> *@
+                    <div class="form-check">
+                        <InputCheckbox @bind-Value="Answer3.IsCorrect" class="form-check-input" />
+                        <label class="form-check-label">Is True: @Answer3.IsCorrect</label>
+                    </div>
+
+                </div>
+                <div class="form-group" id="answer4">
+                    <label for="QuestionText">&nbspAnswer 4</label>
+                    <InputText id="Answer 4" @bind-Value="Answer4.AnswerText" class="form-control" />
+                    <ValidationMessage For="(() => NewQuestion)" />
+                    @* <label for="QuestionText">&nbspIs True?</label> *@
+                    <div class="form-check">
+                        <InputCheckbox @bind-Value="Answer4.IsCorrect" class="form-check-input" />
+                        <label class="form-check-label">Is True: @Answer4.IsCorrect</label>
+                    </div>
+
+                </div>
+    </div>
+    <div id="submit_container">
+                <button id="btn_submit" type="submit" class="btn btn-primary">Create Question</button>
+    </div>
+            <h2 style="color: #26b050">@erstellt</h2>
+    
+    </div>
+</body>
+</EditForm>
+</html>
+@* <EditForm Model="@NewQuestion" OnValidSubmit="Submit">
     <DataAnnotationsValidator />
 
     <ValidationSummary />
@@ -64,7 +140,7 @@
     <button type="submit" class="btn btn-primary">Create Question</button>
 </EditForm>
 
-<h2 style="color: #26b050">@erstellt</h2>
+<h2 style="color: #26b050">@erstellt</h2> *@
 
 
 @code {
@@ -76,16 +152,16 @@
     
     protected override void OnInitialized()
     {
-        if (AnswerRepository.ReadAll() != null)
-        {
-            AnswersList = AnswerRepository.ReadAll();
-        }
-        if (QuestionsRepository.ReadAll() != null)
-        {
-            QuestionsList = QuestionsRepository.ReadAll();
-        }
+        // if (AnswerRepository.ReadAll() != null)
+        // {
+        //     AnswersList = AnswerRepository.ReadAll();
+        // }
+        // if (QuestionsRepository.ReadAll() != null)
+        // {
+        //     QuestionsList = QuestionsRepository.ReadAll();
+        // }
         
-        highestID = QuestionsList.Any() ? QuestionsList.Max(q => q.Id) : 0;
+        // highestID = QuestionsList.Any() ? QuestionsList.Max(q => q.Id) : 0;
         
     }
     

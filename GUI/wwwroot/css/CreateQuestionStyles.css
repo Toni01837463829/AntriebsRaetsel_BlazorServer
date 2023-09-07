@@ -1,0 +1,108 @@
+﻿@font-face {
+    font-family: LunatixBold;
+    src: url(Fonts/Lunatix_Bold.otf);
+}
+
+@font-face {
+    font-family: LunatixLight;
+    src: url(Fonts/Lunatix_Light.otf);
+}
+
+* {
+    font-family: LunatixLight;
+}
+
+#CreateQuestionBody {
+    height:100vh;
+    width:100vw;
+    background-image: url(Hintergrund/orange.png);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+#CreateQuestionh1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: LunatixBold;
+    background: -webkit-linear-gradient(rgb(255, 166, 46) 15%, rgb(0, 0, 0) 85%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    font-size: 12vh;
+}
+
+.content3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3vh;
+}
+
+#submit_container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#answer1 {
+    width: 30vh;
+    height: 12vh;
+    background-color: rgb(212, 137, 255);
+    color: rgb(187, 68, 255);
+    border: 3px rgb(187, 68, 255) solid;
+    border-radius: 12px;
+    margin: 5vh;
+    padding: 0px 5px 85px 5px;
+}
+
+#answer2 {
+    width: 30vh;
+    height: 12vh;
+    background-color: rgb(255, 201, 129);
+    color: rgb(255, 166, 46);
+    border: 3px rgb(255, 166, 46) solid;
+    border-radius: 12px;
+    margin: 5vh;
+    padding: 0px 5px 85px 5px;
+}
+
+#answer3 {
+    width: 30vh;
+    height: 12vh;
+    background-color: rgb(138, 220, 255);
+    color: rgb(82, 187, 232);
+    border: 3px rgb(82, 187, 232) solid;
+    border-radius: 12px;
+    margin: 5vh;
+    padding: 0px 5px 85px 5px;
+}
+#answer4 {
+    width: 30vh;
+    height: 12vh;
+    background-color: rgb(140, 255, 144);
+    color: rgb(70, 213, 75);
+    border: 3px rgb(70, 213, 75) solid;
+    border-radius: 12px;
+    margin: 5vh;
+    padding: 0px 5px 85px 5px;
+}
+
+#btn_submit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50vh;
+    height: 10vh;
+    font-size: 4vh;
+    background-color: rgb(255, 201, 129);
+    color: rgb(255, 166, 46);
+    border: 3px rgb(255, 166, 46) solid;
+    border-radius: 12px;
+    bottom: 15px;
+    position: absolute;
+}
+
+button:hover {
+    cursor: pointer;
+}
