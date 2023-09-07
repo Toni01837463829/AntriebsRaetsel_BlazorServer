@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using GUI;
 using GUI.Data;
 using Microsoft.EntityFrameworkCore;
 using Model.Configurations;
@@ -25,6 +26,8 @@ builder.Services.AddTransient<IRepository<Answers>, AnswerRepository>();
 builder.Services.AddTransient<IRepository<Questions>, QuestionRepository>();
 builder.Services.AddTransient<IRepository<Scores>, ScoresRepository>();
 
+
+builder.Services.AddScoped<UserInformation>();
 
 
 var app = builder.Build();
