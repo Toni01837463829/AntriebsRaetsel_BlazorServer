@@ -62,3 +62,106 @@ a, .btn-link {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
+
+
+/*    Doda weidaoawatn*/
+
+@font-face {
+    font-family: LunatixBold;
+    src: url(Fonts/Lunatix_Bold.otf);
+}
+
+@font-face {
+    font-family: LunatixLight;
+    src: url(Fonts/Lunatix_Light.otf);
+}
+
+* {
+    font-family: LunatixLight;
+}
+
+body {
+    width:100vw;
+    height:100vh;
+    background-image: url(Hintergrund/blau.png);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+}
+
+h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: LunatixBold;
+    background: -webkit-linear-gradient(rgb(82, 187, 232) 15%, rgb(0, 0, 0) 85%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    font-size: 12vh;
+    margin-top:5vh;
+}
+
+
+
+#content1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+#content2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#highscore {
+    font-family: LunatixBold;
+    font-size: 8vh;
+    color: rgb(35, 71, 87);
+    display: flex;
+    justify-content: center;
+}
+
+#scores {
+    font-size: 4vh;
+    color: rgb(35, 71, 87);
+}
+
+#btn_question {
+    width: 30vh;
+    height: 12vh;
+    font-size: 4vh;
+    background-color: rgb(255, 201, 129);
+    color: rgb(255, 166, 46);
+    border: 3px rgb(255, 166, 46) solid;
+    border-radius: 12px;
+    margin-right: 7vh;
+    margin-top: 25vh;
+}
+
+#btn_play {
+    width: 30vh;
+    height: 12vh;
+    font-size: 4vh;
+    background-color: rgb(212, 137, 255);
+    color: rgb(187, 68, 255);
+    border: 3px rgb(187, 68, 255) solid;
+    border-radius: 12px;
+    margin-left: 7vh;
+    margin-top: 25vh;
+}
+#btn_highscore {
+    width: 70vh;
+    height: 10vh;
+    font-size: 4vh;
+    background-color: rgb(140, 255, 144);
+    color: rgb(70, 213, 75);
+    border: 3px rgb(70, 213, 75) solid;
+    border-radius: 12px;
+    position: absolute;
+    bottom: 15px;
+}
+button:hover {
+    cursor: pointer;
+}

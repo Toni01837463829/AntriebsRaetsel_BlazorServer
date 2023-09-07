@@ -5,9 +5,74 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, Startseite!</h1>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Antriebsrätsel</title>
+    <link rel="stylesheet" href="Antriebsrätsel_style.css">
+</head>
+
+<body>
+    <h1>Antriebsrätsel</h1>
+    <div id="content1">
+        @* <input id="btn_question" type="button" value="Some text" onclick="window.location.href='<%= Url.Action(" actionName", "Add Question" ) %>';"/> *@
+        <button id="btn_question">Add Question</button>
+        <div id="content2">
+
+            <p id="highscore">Highscore</p>          
+                <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        @*         @foreach (var score in topScores)
+                    {
+                    <tr>
+                    <td>@score.PlayerName</td>
+                    <td>@score.Score</td>
+                    </tr>
+                    } *@
+                    <tr>
+                        <td>Playername</td>
+                        <td>Score: 1</td>
+                    </tr>
+                    <tr>
+                        <td>Playername</td>
+                        <td>Score: 1</td>
+                    </tr>
+                    <tr>
+                        <td>Playername</td>
+                        <td>Score: 1</td>
+                    </tr>
+                    <tr>
+                        <td>Playername</td>
+                        <td>Score: 1</td>
+                    </tr>
+                       
+                        <tr>
+                            <td>Playername</td>
+                            <td>Score: 1</td>
+                        </tr>
+                </tbody>
+            </table>
+            <button id="btn_highscore">Scoreboard</button>
+
+        </div>
+
+        <button id="btn_play">Play</button>
+    </div>
 
 
+    <script src="Antriebsrätsel_script.js"></script>
+</body>
+
+</html>
 
 
 
