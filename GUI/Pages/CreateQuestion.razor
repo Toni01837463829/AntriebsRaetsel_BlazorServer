@@ -1,0 +1,120 @@
+﻿@page "/CreateQuestion"
+@using Model.Entities
+@using Repos.Implementation
+<h3>CreateQuestion</h3>
+
+<div class="container">
+    <div class="row">
+        <EditForm Model="Question" OnValidSubmit="Create">
+
+            
+            <div class="col-5">
+                <label class ="small text-info" for="MovieName"></label>
+                <InputText class = "form-control form-control-sm" id = "MovieName"
+                           placeholder = "Input Movie Title" @bind-Value="Question.QuestionText"/>
+                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
+            </div>
+            <p></p>
+            <div class="col-5">
+                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
+            </div>
+        </EditForm>
+
+    </div>
+    <div class="row">
+        <EditForm Model="Answer1" OnValidSubmit="Create">
+    
+                
+            <div class="col-5">
+                <label class ="small text-info" for="MovieName"></label>
+                <InputText class = "form-control form-control-sm" id = "MovieName"
+                           placeholder = "Input Movie Title" @bind-Value="Answer1.AnswerText"/>
+                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
+            </div>
+            <p></p>
+            <div class="col-5">
+                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
+            </div>
+        </EditForm>
+    
+    </div>
+    <div class="row">
+        <EditForm Model="Answer2" OnValidSubmit="Create">
+    
+                
+            <div class="col-5">
+                <label class ="small text-info" for="MovieName"></label>
+                <InputText class = "form-control form-control-sm" id = "MovieName"
+                           placeholder = "Input Movie Title" @bind-Value="Answer2.AnswerText"/>
+                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
+            </div>
+            <p></p>
+            <div class="col-5">
+                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
+            </div>
+        </EditForm>
+    
+    </div>
+    <div class="row">
+        <EditForm Model="Question" OnValidSubmit="Create">
+    
+                
+            <div class="col-5">
+                <label class ="small text-info" for="MovieName"></label>
+                <InputText class = "form-control form-control-sm" id = "MovieName"
+                           placeholder = "Input Movie Title" @bind-Value="Answer3.AnswerText"/>
+                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
+            </div>
+            <p></p>
+            <div class="col-5">
+                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
+            </div>
+        </EditForm>
+    
+    </div>
+    <div class="row">
+        <EditForm Model="Answer4" OnValidSubmit="Create">
+    
+                
+            <div class="col-5">
+                <label class ="small text-info" for="MovieName"></label>
+                <InputText class = "form-control form-control-sm" id = "MovieName"
+                           placeholder = "Input Movie Title" @bind-Value="Answer4.AnswerText"/>
+                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
+            </div>
+            <p></p>
+            <div class="col-5">
+                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
+            </div>
+        </EditForm>
+    
+    </div>
+</div>
+
+
+@code {
+
+
+    class newQuestion
+    {
+        string QuestionText { get; set; }
+        Answers Answer1 { get; set; }
+        Answers Answer2 { get; set; }
+        Answers Answer3 { get; set; }
+        Answers Answer4 { get; set; }
+    }
+
+    public Questions Question { get; set; } = new();
+    public Answers Answer1 { get; set; } = new();
+    public Answers Answer2 { get; set; } = new();
+    public Answers Answer3 { get; set; } = new();
+    public Answers Answer4 { get; set; } = new();
+    
+    private void Create()
+    {
+        //QuestionRepository.Create(Question);
+        
+        
+    }
+
+}

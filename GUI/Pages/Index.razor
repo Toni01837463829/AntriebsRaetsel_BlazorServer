@@ -1,4 +1,4 @@
-﻿@page "/test"
+﻿@page "/"
 @using Repos.Interface
 @using Model.Entities
 @inject IRepository<Answers> AnswerRepository;
@@ -6,21 +6,19 @@
 @inject IRepository<Scores> ScoresRepository;
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Hello, Startseite!</h1>
 
-Welcome to your new app.
-<p>Answere: @a.AnswerText</p>
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
 
-@code
-{
-    public List<Answers> answers = new List<Answers>();
-    public Answers a = new Answers();
-    protected void OnInitialized()
+
+
+
+@code {
+
+
+    protected override void OnInitialized()
     {
-        base.OnInitialized();
-        answers = AnswerRepository.ReadAll();
-        a = AnswerRepository.Read(1);
+ 
     }
+
 }

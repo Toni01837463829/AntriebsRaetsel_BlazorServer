@@ -13,14 +13,14 @@ public class AnswerRepository : ARepository<Answers>
 
 public class QuestionRepository : ARepository<Questions>
 {
-    public QuestionRepository(AntriebsContext antriebsContext) : base(antriebsContext)
+    public QuestionRepository(AntriebsContext AntriebsContext) : base(AntriebsContext)
     {
     }
 }
 
 public class ScoresRepository : ARepository<Scores>
 {
-    public ScoresRepository(AntriebsContext antriebsContext) : base(antriebsContext)
+    public ScoresRepository(AntriebsContext AntriebsContext) : base(AntriebsContext)
     {
     }
 }
