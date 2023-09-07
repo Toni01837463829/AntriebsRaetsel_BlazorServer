@@ -1,120 +1,128 @@
 ﻿@page "/CreateQuestion"
 @using Model.Entities
-@using Repos.Implementation
+@using Repos.Interface
+@inject IRepository<Answers> AnswerRepository
+@inject IRepository<Questions> QuestionsRepository
+@inject IRepository<Scores> ScoresRepository
 <h3>CreateQuestion</h3>
 
-<div class="container">
-    <div class="row">
-        <EditForm Model="Question" OnValidSubmit="Create">
+<EditForm Model="@NewQuestion" OnValidSubmit="Submit">
+    <DataAnnotationsValidator />
 
-            
-            <div class="col-5">
-                <label class ="small text-info" for="MovieName"></label>
-                <InputText class = "form-control form-control-sm" id = "MovieName"
-                           placeholder = "Input Movie Title" @bind-Value="Question.QuestionText"/>
-                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
-            </div>
-            <p></p>
-            <div class="col-5">
-                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
-            </div>
-        </EditForm>
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="QuestionText">Question Text:</label>
+        <InputText id="QuestionText" @bind-Value="Question.QuestionText" class="form-control" />
+        <ValidationMessage For="(() => NewQuestion)" />
+    </div>
+    <div class="form-group">
+        <label for="QuestionText">Answer 1</label>
+        <InputText id="Answer 1" @bind-Value="Answer1.AnswerText" class="form-control" />
+        <ValidationMessage For="(() => NewQuestion)" />
+        <label for="QuestionText">Is True?</label>
+        <div class="form-check">
+            <InputCheckbox @bind-Value="Answer1.IsCorrect" class="form-check-input" />
+            <label class="form-check-label">Is True: @Answer1.IsCorrect</label>
+        </div>
 
     </div>
-    <div class="row">
-        <EditForm Model="Answer1" OnValidSubmit="Create">
     
-                
-            <div class="col-5">
-                <label class ="small text-info" for="MovieName"></label>
-                <InputText class = "form-control form-control-sm" id = "MovieName"
-                           placeholder = "Input Movie Title" @bind-Value="Answer1.AnswerText"/>
-                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
-            </div>
-            <p></p>
-            <div class="col-5">
-                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
-            </div>
-        </EditForm>
-    
+    <div class="form-group">
+        <label for="QuestionText">Answer 2</label>
+        <InputText id="Answer 2" @bind-Value="Answer2.AnswerText" class="form-control" />
+        <ValidationMessage For="(() => NewQuestion)" />
+                <label for="QuestionText">Is True?</label>
+        <div class="form-check">
+            <InputCheckbox @bind-Value="Answer2.IsCorrect" class="form-check-input" />
+            <label class="form-check-label">Is True: @Answer2.IsCorrect</label>
+        </div>
+        
     </div>
-    <div class="row">
-        <EditForm Model="Answer2" OnValidSubmit="Create">
-    
-                
-            <div class="col-5">
-                <label class ="small text-info" for="MovieName"></label>
-                <InputText class = "form-control form-control-sm" id = "MovieName"
-                           placeholder = "Input Movie Title" @bind-Value="Answer2.AnswerText"/>
-                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
-            </div>
-            <p></p>
-            <div class="col-5">
-                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
-            </div>
-        </EditForm>
-    
+    <div class="form-group">
+        <label for="QuestionText">Answer 3</label>
+        <InputText id="Answer 3" @bind-Value="Answer3.AnswerText" class="form-control" />
+        <ValidationMessage For="(() => NewQuestion)" />
+                <label for="QuestionText">Is True?</label>
+        <div class="form-check">
+            <InputCheckbox @bind-Value="Answer3.IsCorrect" class="form-check-input" />
+            <label class="form-check-label">Is True: @Answer3.IsCorrect</label>
+        </div>
+        
     </div>
-    <div class="row">
-        <EditForm Model="Question" OnValidSubmit="Create">
-    
-                
-            <div class="col-5">
-                <label class ="small text-info" for="MovieName"></label>
-                <InputText class = "form-control form-control-sm" id = "MovieName"
-                           placeholder = "Input Movie Title" @bind-Value="Answer3.AnswerText"/>
-                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
-            </div>
-            <p></p>
-            <div class="col-5">
-                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
-            </div>
-        </EditForm>
-    
+    <div class="form-group">
+        <label for="QuestionText">Answer 4</label>
+        <InputText id="Answer 4" @bind-Value="Answer4.AnswerText" class="form-control" />
+        <ValidationMessage For="(() => NewQuestion)" />
+                <label for="QuestionText">Is True?</label>
+        <div class="form-check">
+            <InputCheckbox @bind-Value="Answer4.IsCorrect" class="form-check-input" />
+            <label class="form-check-label">Is True: @Answer4.IsCorrect</label>
+        </div>
+        
     </div>
-    <div class="row">
-        <EditForm Model="Answer4" OnValidSubmit="Create">
-    
-                
-            <div class="col-5">
-                <label class ="small text-info" for="MovieName"></label>
-                <InputText class = "form-control form-control-sm" id = "MovieName"
-                           placeholder = "Input Movie Title" @bind-Value="Answer4.AnswerText"/>
-                <ValidationMessage For="() => Question.QuestionText"></ValidationMessage>
-            </div>
-            <p></p>
-            <div class="col-5">
-                <button class="btn btn-info btn-sm" type = "submit" >Create</button>
-            </div>
-        </EditForm>
-    
-    </div>
-</div>
+
+    <button type="submit" class="btn btn-primary">Create Question</button>
+</EditForm>
+
+<h2 style="color: #26b050">@erstellt</h2>
 
 
 @code {
 
-
-    class newQuestion
+    public List<Questions> QuestionsList { get; set; } = new();
+    public List<Answers> AnswersList { get; set; } = new();
+    public int highestID;
+    public string erstellt;
+    
+    protected override void OnInitialized()
+    {
+        if (AnswerRepository.ReadAll() != null)
+        {
+            AnswersList = AnswerRepository.ReadAll();
+        }
+        if (QuestionsRepository.ReadAll() != null)
+        {
+            QuestionsList = QuestionsRepository.ReadAll();
+        }
+        
+        highestID = QuestionsList.Any() ? QuestionsList.Max(q => q.Id) : 0;
+        
+    }
+    
+    
+    public class newQuestion
     {
         string QuestionText { get; set; }
-        Answers Answer1 { get; set; }
-        Answers Answer2 { get; set; }
-        Answers Answer3 { get; set; }
+        string Answer1 { get; set; }
+        string Answer2 { get; set; }
+        string Answer3 { get; set; }
         Answers Answer4 { get; set; }
     }
 
+    public newQuestion NewQuestion { get; set; } = new();
     public Questions Question { get; set; } = new();
     public Answers Answer1 { get; set; } = new();
     public Answers Answer2 { get; set; } = new();
     public Answers Answer3 { get; set; } = new();
     public Answers Answer4 { get; set; } = new();
-    
-    private void Create()
-    {
-        //QuestionRepository.Create(Question);
-        
-        
-    }
 
+    public void Submit()
+    {
+        Question.Id = highestID + 1;
+        QuestionsRepository.Create(Question);
+
+        Answer1.QuestionId = highestID + 1;
+        Answer2.QuestionId = highestID + 1;
+        Answer3.QuestionId = highestID + 1;
+        Answer4.QuestionId = highestID + 1;
+
+        AnswerRepository.Create(Answer1);
+        AnswerRepository.Create(Answer2);
+        AnswerRepository.Create(Answer3);
+        AnswerRepository.Create(Answer4);
+
+        erstellt = "Frage erstellt!";
+    }
 }
+
+
