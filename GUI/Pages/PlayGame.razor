@@ -1,0 +1,21 @@
+﻿@page "/play"
+
+@inject UserInformation userService
+
+<h3>WORK IN PROGRESS [PAGE: PLAY GAME]</h3>
+
+<h1>@userService.Name</h1>
+<h1>Current Score: @userService.CurrentScore</h1>
+<h1>Highscore: @userService.MomentaryHighScore</h1>
+
+
+
+
+@code {
+    private UserInformation _userService;
+
+    protected override void OnInitialized()
+    {
+        _userService = userService;
+    }
+}
