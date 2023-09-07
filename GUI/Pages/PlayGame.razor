@@ -1,21 +1,54 @@
 ﻿@page "/play"
+@using Model.Entities
+@using Repos.Interface
 
 @inject UserInformation userService
-
+@inject IRepository<Answers> AnswerRepository
+@inject IRepository<Questions> QuestionsRepository
+@inject IRepository<Scores> ScoresRepository
 <h3>WORK IN PROGRESS [PAGE: PLAY GAME]</h3>
 
 <h1>@userService.Name</h1>
 <h1>Current Score: @userService.CurrentScore</h1>
 <h1>Highscore: @userService.MomentaryHighScore</h1>
 
-
+<p>Question: @CurrentQuestion.QuestionText</p>
+@foreach(var answer in CurrentAnswers)
+{
+    <p>Answer: @answer.AnswerText; IsCorrect @answer.IsCorrect</p>
+}
 
 
 @code {
     private UserInformation _userService;
+    public List<Answers> AnswersList { get; set; } = new();
+    public List<Questions> QuestionsList { get; set; } = new();
+
+    public Questions CurrentQuestion { get; set; } = new();
+    public List<Answers> CurrentAnswers { get; set; } = new();
 
     protected override void OnInitialized()
     {
         _userService = userService;
+
+        if (AnswerRepository.ReadAll() != null)
+        {
+            AnswersList = AnswerRepository.ReadAll();
+        }
+        if (QuestionsRepository != null)
+        {
+            QuestionsList = QuestionsRepository.ReadAll();
+        }
+        GetNewRandomQuestion();
+ 
+    }
+
+    public void GetNewRandomQuestion()
+    {
+        // get Question from QuestionsList
+        CurrentQuestion = QuestionsList[new Random().Next(0, QuestionsList.Count)];
+        
+        // get Answers with QuestionId from AnswersList
+        CurrentAnswers = AnswersList.Where(x => x.QuestionId == CurrentQuestion.Id).ToList();
     }
 }
