@@ -1,21 +1,150 @@
 ﻿@page "/play"
+@using Model.Entities
+@using Repos.Interface
 
 @inject UserInformation userService
+@inject IRepository<Answers> AnswerRepository
+@inject IRepository<Questions> QuestionsRepository
+@inject IRepository<Scores> ScoresRepository
+@inject NavigationManager NavigationManager
 
-<h3>WORK IN PROGRESS [PAGE: PLAY GAME]</h3>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3>WORK IN PROGRESS [PAGE: PLAY GAME]</h3>
+            
+            <h4>@userService.Name</h4>
+            <h4>Current Score: @userService.CurrentScore</h4>
+            <h4>Highscore: @userService.MomentaryHighScore</h4>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <div class="row">
+        <div class="col-12">
+           <h3 style="background-color: #5c636a; color: #f9fafb">Question: @CurrentQuestion.QuestionText</h3>
+        </div>
+       </div>
+    <div class="row">
+        @foreach(var answer in CurrentAnswers)
+        {
+            <div class="col-3" style="padding: 0px; margin: 0pc">
+                <Button class="bg-info" @onclick="() => ButtonPressed(answer)">Answer: @answer.AnswerText; IsCorrect @answer.IsCorrect</Button>
+            </div>
+        }
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+        <div class="col-3">
+            <button class="btn-danger" style="@(ShowBackButton ? "" : "display:none")" @onclick="() => BackToHome()">Zurück zur Startseite</button>
+        </div>
+        <div class="col-6">
+            <h3>@message</h3>
+        </div>
+        <div class="col-3">
+            <button class="btn-primary" style="@(ShowContinueButton ? "" : "display:none")" @onclick="() => NextQuestion()">Nächste Frage</button>
+        </div>
+    </div>
+    
+</div>
 
-<h1>@userService.Name</h1>
-<h1>Current Score: @userService.CurrentScore</h1>
-<h1>Highscore: @userService.MomentaryHighScore</h1>
 
 
 
 
 @code {
     private UserInformation _userService;
+    public List<Answers> AnswersList { get; set; } = new();
+    public List<Questions> QuestionsList { get; set; } = new();
 
+    public Questions CurrentQuestion { get; set; } = new();
+    public List<Answers> CurrentAnswers { get; set; } = new();
+
+    public string message;
+    
+    public bool ShowContinueButton { get; set; } = false;
+    public bool ShowBackButton { get; set; } = false;
+
+    public int maxQuestions;
+    
     protected override void OnInitialized()
     {
         _userService = userService;
+        if (AnswerRepository.ReadAll() != null)
+        {
+            AnswersList = AnswerRepository.ReadAll();
+        }
+        if (QuestionsRepository != null)
+        {
+            QuestionsList = QuestionsRepository.ReadAll();
+        }
+        GetNewRandomQuestion();
+
+        maxQuestions = QuestionsList.Count;
+
+    }
+
+    public void GetNewRandomQuestion()
+    {
+        // get Question from QuestionsList where QuestionID is not in previousQuestionIDs
+        CurrentQuestion = QuestionsList.Where(x => !_userService.previousQuestionIDs.Contains(x.Id)).OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+        
+        // get Answers with QuestionId from AnswersList
+        CurrentAnswers = AnswersList.Where(x => x.QuestionId == CurrentQuestion.Id).ToList();
+        
+        _userService.previousQuestionIDs.Add(CurrentQuestion.Id);
+        
+    }
+
+    public void NextQuestion()
+    {
+        if (_userService.CurrentScore == maxQuestions)
+        {
+            message = "Du hast alle Fragen beantwortet!";
+            ShowBackButton = true;
+            ShowContinueButton = false;
+        }
+        else
+        {
+            GetNewRandomQuestion();
+            message = "";
+            ShowContinueButton = false;
+        }
+ 
+    }
+
+    public void ButtonPressed(Answers answer)
+    {
+        
+        
+
+        if (answer.IsCorrect)
+        {
+            message = "Richtig! :)";
+            ShowContinueButton = true;
+            _userService.CurrentScore++;
+        }
+        else
+        {
+            message = "leider falsch! :(";
+            ShowBackButton = true;
+        }
+        
+    }
+    
+    public void BackToHome()
+    {
+        Scores score = new Scores() {Score = _userService.CurrentScore, PlayerName = _userService.Name};
+        
+        _userService.MomentaryHighScore = _userService.CurrentScore;
+        _userService.CurrentScore = 0;
+        _userService.previousQuestionIDs.Clear();
+
+
+        ScoresRepository.Create(score);
+        
+        NavigationManager.NavigateTo("/");
     }
 }
