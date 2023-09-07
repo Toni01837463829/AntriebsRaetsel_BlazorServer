@@ -152,16 +152,16 @@
     
     protected override void OnInitialized()
     {
-        // if (AnswerRepository.ReadAll() != null)
-        // {
-        //     AnswersList = AnswerRepository.ReadAll();
-        // }
-        // if (QuestionsRepository.ReadAll() != null)
-        // {
-        //     QuestionsList = QuestionsRepository.ReadAll();
-        // }
+        if (AnswerRepository.ReadAll() != null)
+        {
+             AnswersList = AnswerRepository.ReadAll();
+        }
+        if (QuestionsRepository.ReadAll() != null)
+        {
+            QuestionsList = QuestionsRepository.ReadAll();
+        }
         
-        // highestID = QuestionsList.Any() ? QuestionsList.Max(q => q.Id) : 0;
+        highestID = QuestionsList.Any() ? QuestionsList.Max(q => q.Id) : 0;
         
     }
     

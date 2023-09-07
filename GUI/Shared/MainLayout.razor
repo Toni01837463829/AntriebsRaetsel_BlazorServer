@@ -1,7 +1,18 @@
-﻿@inherits LayoutComponentBase
+﻿
+@inject UserInformation userInfo
+@inherits LayoutComponentBase
 
 <PageTitle>GUI</PageTitle>
 
+<h4
+  style="
+            position: fixed;
+            top: 0;
+            right: 0;
+            padding: 10px;
+        ">
+  @userInfo.Name
+</h4>
 <div class="page">
   @Body
 </div>

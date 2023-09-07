@@ -3,9 +3,15 @@ create database AntriebsRaetsel;
 -- Use the AntriebsRaetsel database
 USE AntriebsRaetsel;
 
-TRUNCATE AntriebsRaetsel.answers;
-TRUNCATE AntriebsRaetsel.questions;
-TRUNCATE AntriebsRaetsel.scores;
+
+
+-- Delete all data from the tables
+
+
+
+TRUNCATE ANSWERS;
+TRUNCATE QUESTIONS PURGE;
+TRUNCATE SCORES;
 
 -- Insert test data for 20 different people into SCORES table
 INSERT INTO SCORES (QUESTION_ID, PLAYER_NAME, SCORE)

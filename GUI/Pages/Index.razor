@@ -2,6 +2,7 @@
 @using Repos.Interface
 @using Model.Entities
 @inject NavigationManager NavigationManager
+@inject IRepository<Scores> ScoresRepository
 
 <PageTitle>Index</PageTitle>
 <div class="container">
@@ -9,75 +10,58 @@
         <h1>Antriebsrätsel</h1>
     </div>
     <div class="row">
+        
+    <div id="content1">
+        
+        <button id="btn_question" @onclick="AddQuestionPage">Add Question</button>
+        <div id="content2">
 
-        <div id="content1">
-
-            <button id="btn_question" @onclick="AddQuestionPage">Add Question</button>
-            <div id="content2">
-
-                <p id="highscore">Highscore</p>
+            <p id="highscore">Highscore</p>          
                 <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Player Name</th>
-                            <th>Score</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @*         @foreach (var score in topScores)
-                        {
-                        <tr>
+                <thead>
+                    <tr>
+                        <th>Player Name</th>
+                        <th>Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                
+                @foreach (var score in topScores)
+                {
+                    <tr>
                         <td>@score.PlayerName</td>
                         <td>@score.Score</td>
-                        </tr>
-                        } *@
-                        <tr>
-                            <td>Playername</td>
-                            <td>Score: 1</td>
-                        </tr>
-                        <tr>
-                            <td>Playername</td>
-                            <td>Score: 1</td>
-                        </tr>
-                        <tr>
-                            <td>Playername</td>
-                            <td>Score: 1</td>
-                        </tr>
-                        <tr>
-                            <td>Playername</td>
-                            <td>Score: 1</td>
-                        </tr>
+                    </tr>
+                }
 
-                        <tr>
-                            <td>Playername</td>
-                            <td>Score: 1</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button id="btn_change_name" @onclick="ChangeNamePage">Change Name</button>
-                
-                <button id="btn_highscore" @onclick="HighscorePage">Scoreboard</button>
-
-            </div>
-
-            <button id="btn_play" @onclick="PlayPage">Play</button>
+                </tbody>
+            </table>
+            <button id="btn_change_name" @onclick="ChangeNamePage">Change Name</button>
+            <button id="btn_highscore" @onclick="HighscorePage">Scoreboard</button>
         </div>
+
+        <button id="btn_play"  @onclick="PlayGame">Play</button>
+    </div>
+
     </div>
 </div>
-
-
-
-   
-
+    
 
 
 @code {
 
-
+    private List<Scores> topScores;
+    
     protected override void OnInitialized()
     {
-
+        // Load the top 10 scores from the repository
+            topScores = ScoresRepository.ReadAll()
+                .OrderByDescending(s => s.Score)
+                .Take(7)
+                .ToList();
     }
+
+    
     private void AddQuestionPage()
     {
         NavigationManager.NavigateTo("/CreateQuestion");
@@ -88,10 +72,10 @@
     }
     private void ChangeNamePage()
     {
-        // NavigationManager.NavigateTo("/Scoreboard/10");
+        NavigationManager.NavigateTo("/ChangeName");
     }
-    private void PlayPage()
+    private void PlayGame()
     {
-        NavigationManager.NavigateTo("/Play");
+        NavigationManager.NavigateTo("/play");
     }
 }

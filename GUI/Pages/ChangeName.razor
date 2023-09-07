@@ -1,0 +1,57 @@
+﻿@page "/ChangeName"
+@inject UserInformation userService
+@inject NavigationManager NavigationManager
+
+<EditForm Model="@Soeinbledsinn" OnValidSubmit="Submit">
+
+    <div id="CreateQuestionBody">
+        <h2>ChangeName</h2>
+        <h3>Current Name: @_userService.Name</h3>
+        <h1 id="CreateQuestionh1">New Name:</h1>
+        <div class="content3">
+            <div class="form-group" id="Neuer Name">
+                <label for="QuestionText">New Name:</label>
+                <InputText id="Answer 3" @bind-Value="NewName" class="form-control"/>
+            </div>
+        </div>
+
+        <div id="submit_container">
+            <button id="btn_submit" type="submit" class="btn btn-primary">Save</button>
+        </div>
+
+
+    </div>
+
+</EditForm>
+
+
+@code {
+    private UserInformation _userService;
+    
+    public class soeinbledsinn
+    {
+        public string AnswerText { get; set; }
+    }
+    
+    public string NewName { get; set; } 
+    public soeinbledsinn Soeinbledsinn { get; set; } = new();
+
+    public void Submit()
+    {
+        _userService.Name = NewName;
+        BackToHome();  
+    }
+
+    protected override void OnInitialized()
+    {
+        _userService = userService;
+        NewName = _userService.Name;
+    }
+    
+    public void BackToHome()
+    {
+       
+        NavigationManager.NavigateTo("/");
+    }
+
+}

@@ -8,14 +8,13 @@
 @inject IRepository<Scores> ScoresRepository
 @inject NavigationManager NavigationManager
 
-<div class="bg_play">
+<div class="bg_play" style="height: 100vh;">
 
 <div class="container">
     <div class="row">
         <div class="col-12">
             <h1 id="playGamesh1">Question</h1>
-            <h3>WORK IN PROGRESS [PAGE: PLAY GAME]</h3>
-            
+
             <h4>@userService.Name</h4>
             <h4>Current Score: @userService.CurrentScore</h4>
             <h4>Highscore: @userService.MomentaryHighScore</h4>
@@ -25,28 +24,16 @@
     <br/>
     <div class="row">
         <div class="col-12">
-           <h3 id="question">Question: FRAGE</h3>
+           <h3 id="question">Question: @CurrentQuestion.QuestionText</h3>
         </div>
        </div>
     <div class="row">
-@*         @foreach(var answer in CurrentAnswers)
+         @foreach(var answer in CurrentAnswers)
         {
-            <div class="col-3" style="padding: 0px; margin: 0pc">
-                <Button class="bg-info" @onclick="() => ButtonPressed(answer)">Answer: @answer.AnswerText; IsCorrect @answer.IsCorrect</Button>
+            <div class="buttons col-3" style="padding: 0px; margin: 0pc">
+                <Button class="btn_answer" @onclick="() => ButtonPressed(answer)">Answer: @answer.AnswerText; IsCorrect @answer.IsCorrect</Button>
             </div>
-        } *@
-        <div class="buttons col-3">
-                    <Button class="btn_answer"><p>Answer: 123</p></Button>
-        </div>
-        <div class="buttons col-3">
-                <Button class="btn_answer"><p>Answer: 123</p></Button>
-        </div>
-        <div class="buttons col-3">
-                <Button class="btn_answer"><p>Answer: 123</p></Button>
-        </div>
-        <div class="buttons col-3">
-                <Button class="btn_answer"><p>Answer: 12ajdssfoasfdsakfsaklfjdjfskalöfjdgjdlöfjladsfjadölkfjdslfjdslkghaslkghfjfdhglkdashalsghadsljfhadsfdshadjsfhdasfjhdkjfhaskfjdashfdsajkfhsdkfhdskjfhasdjfa3</p></Button>
-        </div>
+        } 
 
     </div>
     <br>
@@ -87,20 +74,22 @@
 
     public int maxQuestions;
     
+    public bool IsButtonActive { get; set; } = true;
+    
     protected override void OnInitialized()
     {
-        // _userService = userService;
-        // if (AnswerRepository.ReadAll() != null)
-        // {
-        //     AnswersList = AnswerRepository.ReadAll();
-        // }
-        // if (QuestionsRepository != null)
-        // {
-        //     QuestionsList = QuestionsRepository.ReadAll();
-        // }
-        // GetNewRandomQuestion();
+        _userService = userService;
+        if (AnswerRepository.ReadAll() != null)
+        {
+            AnswersList = AnswerRepository.ReadAll();
+        }
+        if (QuestionsRepository != null)
+        {
+            QuestionsList = QuestionsRepository.ReadAll();
+        }
+        GetNewRandomQuestion();
 
-        // maxQuestions = QuestionsList.Count;
+        maxQuestions = QuestionsList.Count;
 
     }
 
@@ -130,7 +119,7 @@
             message = "";
             ShowContinueButton = false;
         }
- 
+        IsButtonActive = true;
     }
 
     public void ButtonPressed(Answers answer)
@@ -138,16 +127,21 @@
         
         
 
-        if (answer.IsCorrect)
+        if (answer.IsCorrect && IsButtonActive)
         {
             message = "Richtig! :)";
             ShowContinueButton = true;
             _userService.CurrentScore++;
+            IsButtonActive = false;
         }
         else
         {
-            message = "leider falsch! :(";
-            ShowBackButton = true;
+            if (IsButtonActive)
+            {
+                message = "leider falsch! :(";
+                ShowBackButton = true;
+                IsButtonActive = false;
+            }
         }
         
     }
@@ -155,6 +149,7 @@
     public void BackToHome()
     {
         Scores score = new Scores() {Score = _userService.CurrentScore, PlayerName = _userService.Name};
+        IsButtonActive = true;
         
         _userService.MomentaryHighScore = _userService.CurrentScore;
         _userService.CurrentScore = 0;
